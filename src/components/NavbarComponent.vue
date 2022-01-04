@@ -66,9 +66,6 @@ import { mapState } from "vuex";
 
 export default {
   name: "Navbar",
-  data() {
-    return {};
-  },
   computed: {
     ...mapState("users", ["user"]),
   },

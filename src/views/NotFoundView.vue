@@ -1,5 +1,23 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="section is-large">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-half has-text-centered">
+          <h1 class="title" is-spaced>404 Página no encontrada</h1>
+          <b-button type="is-link" tag="router-link" to="/"
+            >Ir al página principal</b-button
+          >
+        </div>
+      </div>
+    </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: "NotFound",
+};
+</script>
+
+<style scoped>
+</style>

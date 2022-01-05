@@ -1,5 +1,5 @@
 import dataService from "@/services/data.service.js";
-import { configBuilderForChart } from "@/services/configBuilder.service.js";
+import configBuilderService from "@/services/configBuilder.service.js";
 
 const state = {
   data: {},
@@ -21,12 +21,20 @@ const actions = {
 
 const getters = {
   getData() {
-    const mappedData = configBuilderForChart(state.data);
-    return mappedData;
+    const mappedDataChart = configBuilderService.configBuilderForChart(
+      state.data
+    );
+    return mappedDataChart;
+  },
+
+  getDataForTable() {
+    const mappedDataTable = configBuilderService.configBuilderForTableSensor(
+      state.data
+    );
+    return mappedDataTable;
   },
 
   isDataReady() {
-    console.log("isdataReady", state.data !== {});
     return state.data !== {};
   },
 };

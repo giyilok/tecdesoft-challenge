@@ -1,6 +1,6 @@
 <template>
   <div class="chart-wrapper box">
-    <canvas id="myCanva"></canvas>
+    <canvas ref="myCanva"></canvas>
   </div>
 </template>
 
@@ -11,10 +11,7 @@ export default {
   name: "Chart",
   props: ["config"],
   mounted() {
-    const config = this.$store.state.data.data;
-    console.log("en chart config", config);
-    console.log("en chart this.config", this.config);
-    new Chart(document.getElementById("myCanva"), this.config);
+    new Chart(this.$refs.myCanva, this.config);
   },
 };
 </script>

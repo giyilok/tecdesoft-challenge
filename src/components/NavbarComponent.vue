@@ -1,35 +1,25 @@
 <template>
   <b-navbar wrapper-class="container" shadow centered spaced>
     <template #brand>
-      <b-navbar-item tag="router-link" :to="{ path: '/' }">
-        <p class="title is-3 has-text-primary is-family-secondary">Graphing</p>
+      <b-navbar-item tag="router-link" :to="{ path: '/Home' }">
+        <p class="title is-4 has-text-primary">Tecdesoft Challenge</p>
       </b-navbar-item>
     </template>
-    <template #start>
+
+    <template #start v-if="user">
       <b-navbar-item tag="router-link" :to="{ name: 'Home' }">
         <b-icon type="is-primary" icon="home" class="mr-1"></b-icon>
         Home
       </b-navbar-item>
       <b-navbar-item tag="router-link" :to="{ name: 'charts' }">
         <b-icon type="is-primary" icon="chart-line" class="mr-1"></b-icon>
-        Gráficas
-      </b-navbar-item>
-      <b-navbar-item tag="router-link" :to="{ name: 'tables' }">
-        <b-icon type="is-primary" icon="table" class="mr-1"></b-icon>
-        Tablas
+        Informe
       </b-navbar-item>
 
-      <b-icon type="is-primary" icon="info"></b-icon>
-      <b-navbar-dropdown label="Info">
-        <b-navbar-item tag="router-link" :to="{ name: 'About' }">
-          <b-icon type="is-primary" icon="list" class="mr-1"></b-icon>
-          About
-        </b-navbar-item>
-        <b-navbar-item tag="router-link" :to="{ name: 'contact' }">
-          <b-icon type="is-primary" icon="phone" class="mr-1"></b-icon>
-          Contact
-        </b-navbar-item>
-      </b-navbar-dropdown>
+      <b-navbar-item tag="router-link" :to="{ name: 'contact' }">
+        <b-icon type="is-primary" icon="phone" class="mr-1"></b-icon>
+        Contact
+      </b-navbar-item>
     </template>
 
     <template #end>
@@ -45,16 +35,6 @@
           >
             Log out</b-button
           >
-
-          <b-button
-            v-else
-            tag="router-link"
-            type="is-primary"
-            to="/"
-            icon-left="user"
-          >
-            <strong>Log in</strong>
-          </b-button>
         </div>
       </b-navbar-item>
     </template>

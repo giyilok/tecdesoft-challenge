@@ -1,5 +1,7 @@
 # tecdesoft
 
+Proyecto realizado para prueba técnica de Tecdesoft
+
 ## Project setup
 ```
 npm install

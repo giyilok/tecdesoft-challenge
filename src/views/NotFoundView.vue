@@ -4,7 +4,7 @@
       <div class="columns is-centered">
         <div class="column is-half has-text-centered">
           <h1 class="title" is-spaced>404 Página no encontrada</h1>
-          <b-button type="is-link" tag="router-link" to="/"
+          <b-button type="is-link" tag="router-link" to="/charts"
             >Ir al página principal</b-button
           >
         </div>

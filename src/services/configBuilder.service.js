@@ -1,11 +1,25 @@
 const configBuilderService = {
   configBuilderForChart(dataChart) {
+    const colors = [
+      "hsl(256, 80%, 67%)",
+      "hsl(171, 100%, 41%)",
+      "hsl(48, 100%, 67%)",
+    ];
+
+    const lightColors = [
+      "hsl(257, 84%, 95%)",
+      "hsl(142, 52%, 96%)",
+      "hsl(48, 100%, 96%)",
+    ];
+
     const datasets = [];
 
     for (let prop in dataChart) {
       const obj = {
         label: prop,
         data: dataChart[prop],
+        borderColor: [`${colors[datasets.length]}`],
+        backgroundColor: [`${lightColors[datasets.length]}`],
       };
       datasets.push(obj);
     }
@@ -24,12 +38,26 @@ const configBuilderService = {
           },
           title: {
             display: true,
-            text: "Chart.js Line Chart",
+            text: "Informe de línea temporal de datos",
           },
         },
         parsing: {
           xAxisKey: "Date",
           yAxisKey: "Value",
+        },
+        scales: {
+          x: {
+            type: "time",
+            title: "Fecha",
+            display: true,
+            offset: true,
+          },
+          y: {
+            title: "Valor",
+            display: true,
+
+            max: 65,
+          },
         },
       },
     };

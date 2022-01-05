@@ -137,7 +137,7 @@ export default {
     ...mapActions("data", ["fetchData"]),
     showSelectedRow(row) {
       const results = utils.calculate(row);
-      console.log(results);
+
       this.$buefy.dialog.alert({
         title: "Datos estadísticos",
         message: `<p><strong>Valor mínimo:</strong>  ${results.min} </p>

@@ -71,8 +71,8 @@ export default {
   data() {
     return {
       userData: {
-        email: "josecarlos-perez@tecdesoft.es",
-        password: "TicoTico22$$",
+        email: "",
+        password: "",
       },
       isLoading: false,
       message: "",

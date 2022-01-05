@@ -13,7 +13,12 @@ const dataService = {
 
       return result.data;
     } catch (error) {
-      console.log(error);
+      const message =
+        error.response?.status == 401
+          ? "El token ya no es válido, vuelva a loguearse"
+          : error.message;
+
+      throw new Error(message);
     }
   },
 };

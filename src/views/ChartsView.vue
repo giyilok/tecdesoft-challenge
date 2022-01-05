@@ -155,7 +155,16 @@ export default {
 
         this.showChart = true;
       } catch (error) {
-        console.log(error);
+        this.$buefy.dialog.alert({
+          title: "Errror",
+          type: "is-danger",
+          message: error.message,
+          hasIcon: true,
+          icon: "cancel",
+          iconPack: "mdi",
+        });
+        this.$store.dispatch("users/doLogout");
+        this.$router.push({ name: "login" });
       }
     }
   },

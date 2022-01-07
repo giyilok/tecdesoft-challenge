@@ -73,15 +73,14 @@ const configBuilderService = {
           return { Fecha: item.Date, [prop]: item.Value };
         })
         .reduce((acc, item, index) => {
+          let obj = {};
           if (!acc[index]) {
-            const obj = Object.assign({}, item);
-            acc[index] = obj;
-            return acc;
+            obj = { ...obj, item };
           } else {
-            const obj = Object.assign(acc[index], item);
-            acc[index] = obj;
-            return acc;
+            obj = Object.assign(acc[index], item);
           }
+          acc[index] = obj;
+          return acc;
         }, data);
     }
     return data;

@@ -14,19 +14,9 @@
 import NavbarComponent from "@/components/NavbarComponent";
 import FooterComponent from "@/components/FooterComponent";
 
-//import { getIdToken, getUserFromToLs } from "@/utils/utils.js";
-
 export default {
   name: "App",
   components: { NavbarComponent, FooterComponent },
-  /* created() {
-    const authToken = getIdToken();
-
-    if (authToken) {
-      const user = getUserFromToLs();
-      this.$store.dispatch("users/updateUser", user);
-    }
-  }, */
 };
 </script>
 

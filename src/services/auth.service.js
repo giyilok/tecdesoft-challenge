@@ -12,7 +12,6 @@ const authService = {
         password,
         returnSecureToken: true,
       });
-
       const user = new User(result.data);
 
       localStorage.setItem("x-user", JSON.stringify(user));

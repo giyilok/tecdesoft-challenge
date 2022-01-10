@@ -71,8 +71,8 @@ export default {
   data() {
     return {
       userData: {
-        email: "",
-        password: "",
+        email: "josecarlos-perez@tecdesoft.es",
+        password: "TicoTico22$$",
       },
       isLoading: false,
       message: "",
@@ -94,7 +94,7 @@ export default {
         this.$buefy.toast.open({
           message: "Tes has logueado con éxito",
           type: "is-success",
-          position: "is-bottom",
+          position: "is-bottom-right",
         });
 
         this.$router.push({ name: "charts" });

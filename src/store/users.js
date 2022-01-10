@@ -23,9 +23,11 @@ const mutations = {
     state.loggedIn = false;
     state.user = null;
   },
-  refreshToken(state, idToken) {
+
+  refreshTokens(state, { idToken, refreshToken }) {
     state.loggedIn = true;
     state.user.idToken = idToken;
+    state.user.refreshToken = refreshToken;
   },
 };
 
@@ -47,8 +49,8 @@ const actions = {
     commit("setLogout");
   },
 
-  refreshToken({ commit }, idToken) {
-    commit("refreshToken", idToken);
+  refreshTokens({ commit }, tokens) {
+    commit("refreshTokens", tokens);
   },
 
   /* async refreshIdToken({ commit }) {

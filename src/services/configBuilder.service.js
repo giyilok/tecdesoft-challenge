@@ -75,7 +75,7 @@ const configBuilderService = {
         .reduce((acc, item, index) => {
           let obj = {};
           if (!acc[index]) {
-            obj = { ...obj, item };
+            obj = Object.assign(obj, item);
           } else {
             obj = Object.assign(acc[index], item);
           }

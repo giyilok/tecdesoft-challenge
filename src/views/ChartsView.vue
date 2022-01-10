@@ -155,10 +155,13 @@ export default {
 
         this.showChart = true;
       } catch (error) {
+        const message =
+          error.response?.data || error.message || error.toString();
+
         this.$buefy.dialog.alert({
           title: "Errror",
           type: "is-danger",
-          message: error.message,
+          message: message,
           hasIcon: true,
           icon: "cancel",
           iconPack: "mdi",

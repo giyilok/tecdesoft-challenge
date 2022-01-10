@@ -56,7 +56,7 @@ export default {
       this.$buefy.toast.open({
         message: "Tes has has deslogueado!",
         type: "is-warning",
-        position: "is-bottom",
+        position: "is-bottom-right",
       });
     },
   },

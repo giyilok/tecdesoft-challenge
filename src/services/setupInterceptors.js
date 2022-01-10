@@ -1,4 +1,5 @@
 import axiosInstance from "./api.service.js";
+//import axios from "axios";
 import TokenService from "./token.service.js";
 
 const setup = (store) => {
@@ -32,19 +33,26 @@ const setup = (store) => {
         if (error.response.status === 401 && !originalConfig._retry) {
           originalConfig._retry = true;
 
+          const params = new URLSearchParams();
+          params.append("grant_type", "refresh_token");
+          params.append("refresh_token", `${TokenService.getRefreshToken()}`);
+
           try {
-            const rs = await axiosInstance.post(
+            const result = await axiosInstance.post(
               "https://securetoken.googleapis.com/v1/token?key=AIzaSyBr1ehjxkXlICK-Zu0Wu_zUg8H68aQAp5k",
+              params,
               {
-                grant_type: "refresh-token",
-                refreshToken: TokenService.getRefreshToken(),
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded",
+                },
               }
             );
 
-            const { id_token, refresh_token } = rs.data;
+            const { id_token, refresh_token } = result.data;
+            const tokens = { idToken: id_token, refreshToken: refresh_token };
 
-            store.dispatch("users/refreshToken", { id_token, refresh_token });
-            TokenService.updateTokens({ id_token, refresh_token });
+            store.dispatch("users/refreshTokens", tokens);
+            TokenService.updateTokens(tokens);
 
             return axiosInstance(originalConfig);
           } catch (_error) {

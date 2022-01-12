@@ -1,17 +1,121 @@
+//import { format } from "date-fns";
+import { es } from "date-fns/locale";
+
+const colors = [
+  "hsl(256, 80%, 67%)",
+  "hsl(171, 100%, 41%)",
+  "hsl(48, 100%, 67%)",
+];
+
+const lightColors = [
+  "hsl(257, 84%, 95%)",
+  "hsl(142, 52%, 96%)",
+  "hsl(48, 100%, 96%)",
+];
+
 const configBuilderService = {
+  // Obtener datos
+  getDataForMyExperimentalChart(dataFromStore, type = "line") {
+    const dataChart = JSON.parse(JSON.stringify(dataFromStore));
+    console.log("DataChart ", dataChart);
+
+    // Setup
+    // Datasets
+    const datasets = [];
+
+    for (let prop in dataChart) {
+      // Map the prop array
+      const mappedPropArray = dataChart[prop].map((item) => {
+        return {
+          fecha: item.Date,
+          /* format(new Date(item.Date), "dd-MMMM-yyyy", { locale: es }) */ valor:
+            item.Value,
+        };
+      });
+
+      const obj = {
+        label: prop,
+        data: mappedPropArray,
+        borderColor: [`${colors[datasets.length]}`],
+        backgroundColor: [`${lightColors[datasets.length]}`],
+      };
+
+      datasets.push(obj);
+    }
+
+    const data = { datasets };
+    console.log("data ", data);
+
+    // Config
+    const config = {
+      type,
+      data: data,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        parsing: {
+          xAxisKey: "fecha",
+          yAxisKey: "valor",
+        },
+        scales: {
+          x: {
+            type: "time",
+            adapters: {
+              date: {
+                locale: es,
+              },
+            },
+            time: {
+              displayFormats: {
+                day: "dd-MMM",
+              },
+              unit: "day",
+            },
+            title: {
+              text: "Fecha",
+              display: true,
+            },
+            ticks: {
+              source: "data",
+            },
+          },
+          y: {
+            title: {
+              text: "Valores",
+              display: true,
+            },
+            min: 30,
+            max: 65,
+          },
+        },
+        plugins: {
+          legend: {
+            position: "top",
+          },
+          title: {
+            text: "Datos de los tres sensores",
+            display: true,
+          },
+          /* subtitle: {
+            text: "Primer mes del año",
+            display: true,
+            color: "hsl(256, 80%, 67%)",
+            font: {
+              style: "italic",
+              size: 12,
+            },
+            padding: {
+              bottom: 12,
+            },
+          }, */
+        },
+      },
+    };
+
+    return config;
+  },
+
   configBuilderForChart(dataChart) {
-    const colors = [
-      "hsl(256, 80%, 67%)",
-      "hsl(171, 100%, 41%)",
-      "hsl(48, 100%, 67%)",
-    ];
-
-    const lightColors = [
-      "hsl(257, 84%, 95%)",
-      "hsl(142, 52%, 96%)",
-      "hsl(48, 100%, 96%)",
-    ];
-
     const datasets = [];
 
     for (let prop in dataChart) {

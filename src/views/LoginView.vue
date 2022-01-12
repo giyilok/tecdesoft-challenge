@@ -97,7 +97,7 @@ export default {
           position: "is-bottom-right",
         });
 
-        this.$router.push({ name: "charts" });
+        this.$router.push({ name: "report" });
       } catch (error) {
         this.message = error.message;
         this.showError = true;
@@ -108,7 +108,7 @@ export default {
   },
   created() {
     if (this.isAuthenticated) {
-      this.$router.push({ name: "Home" });
+      this.$router.push({ name: "report" });
     }
   },
 };

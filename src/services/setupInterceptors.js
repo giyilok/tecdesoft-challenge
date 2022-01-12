@@ -1,5 +1,4 @@
 import axiosInstance from "./api.service.js";
-//import axios from "axios";
 import TokenService from "./token.service.js";
 
 const setup = (store) => {

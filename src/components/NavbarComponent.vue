@@ -11,14 +11,25 @@
         <b-icon type="is-primary" icon="home" class="mr-1"></b-icon>
         Home
       </b-navbar-item>
-      <b-navbar-item tag="router-link" :to="{ name: 'charts' }">
-        <b-icon type="is-primary" icon="chart-line" class="mr-1"></b-icon>
+
+      <b-navbar-item tag="router-link" :to="{ name: 'report' }">
+        <b-icon type="is-primary" icon="clipboard-list" class="mr-1"></b-icon>
         Informe
       </b-navbar-item>
 
+      <b-navbar-item tag="router-link" :to="{ name: 'charts' }">
+        <b-icon type="is-primary" icon="chart-line" class="mr-1"></b-icon>
+        Gráficos
+      </b-navbar-item>
+
+      <!-- <b-navbar-item tag="router-link" :to="{ name: 'tables' }">
+        <b-icon type="is-primary" icon="table" class="mr-1"></b-icon>
+        Tablas
+      </b-navbar-item> -->
+
       <b-navbar-item tag="router-link" :to="{ name: 'contact' }">
         <b-icon type="is-primary" icon="phone" class="mr-1"></b-icon>
-        Contact
+        Contacto
       </b-navbar-item>
     </template>
 

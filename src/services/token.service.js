@@ -6,7 +6,6 @@ const tokenService = {
 
   getRefreshToken() {
     const user = JSON.parse(localStorage.getItem("x-user"));
-    console.log("En getRefreshToken ", user.refreshToken);
     return user?.refreshToken;
   },
 

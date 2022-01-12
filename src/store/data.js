@@ -2,7 +2,7 @@ import dataService from "@/services/data.service.js";
 import configBuilderService from "@/services/configBuilder.service.js";
 
 const state = {
-  data: {},
+  data: null,
 };
 
 const mutations = {
@@ -21,10 +21,18 @@ const actions = {
 
 const getters = {
   getData() {
-    const mappedDataChart = configBuilderService.configBuilderForChart(
+    const mappedDatachart = configBuilderService.configBuilderForChart(
       state.data
     );
-    return mappedDataChart;
+
+    return mappedDatachart;
+  },
+
+  getDataForMyExperimentalChart() {
+    const mappedDatachart = configBuilderService.getDataForMyExperimentalChart(
+      state.data
+    );
+    return mappedDatachart;
   },
 
   getDataForTable() {
@@ -35,7 +43,7 @@ const getters = {
   },
 
   isDataReady() {
-    return state.data !== {};
+    return JSON.parse(JSON.stringify(state.data)) !== null;
   },
 };
 

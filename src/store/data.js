@@ -28,9 +28,17 @@ const getters = {
     return mappedDatachart;
   },
 
-  getDataForMyExperimentalChart() {
+  getDataForMyExperimentalChartLine() {
     const mappedDatachart = configBuilderService.getDataForMyExperimentalChart(
       state.data
+    );
+    return mappedDatachart;
+  },
+
+  getDataForMyExperimentalChartBar() {
+    const mappedDatachart = configBuilderService.getDataForMyExperimentalChart(
+      state.data,
+      "bar"
     );
     return mappedDatachart;
   },
@@ -39,7 +47,16 @@ const getters = {
     const mappedDataTable = configBuilderService.configBuilderForTableSensor(
       state.data
     );
-    return mappedDataTable;
+    console.log("data.store Sensors ", mappedDataTable);
+    return JSON.parse(JSON.stringify(mappedDataTable));
+  },
+
+  getDataForTableDates() {
+    const mappedDataTable = configBuilderService.configBuilderForTableDates(
+      state.data
+    );
+    console.log("data.store  Dates ", mappedDataTable);
+    return JSON.parse(JSON.stringify(mappedDataTable));
   },
 
   isDataReady() {

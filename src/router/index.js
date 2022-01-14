@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import ContactView from "../views/ContactView.vue";
 import ChartsView from "../views/ChartsView.vue";
+import TablesViews from "../views/TablesView.vue";
 import LoginView from "../views/LoginView.vue";
 import ReportView from "../views/ReportView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
@@ -35,6 +36,14 @@ const routes = [
     path: "/charts",
     name: "charts",
     component: ChartsView,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/tables",
+    name: "tables",
+    component: TablesViews,
     meta: {
       requiresAuth: true,
     },

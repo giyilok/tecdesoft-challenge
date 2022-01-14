@@ -22,10 +22,10 @@
         Gráficos
       </b-navbar-item>
 
-      <!-- <b-navbar-item tag="router-link" :to="{ name: 'tables' }">
+      <b-navbar-item tag="router-link" :to="{ name: 'tables' }">
         <b-icon type="is-primary" icon="table" class="mr-1"></b-icon>
         Tablas
-      </b-navbar-item> -->
+      </b-navbar-item>
 
       <b-navbar-item tag="router-link" :to="{ name: 'contact' }">
         <b-icon type="is-primary" icon="phone" class="mr-1"></b-icon>

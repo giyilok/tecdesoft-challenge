@@ -1,15 +1,39 @@
 <template>
-  <section class="section has-text-centered">
-    <div class="container">
-      <h1 class="title title is-2 part has-text-primary">
-        Gráficas detalladas
-      </h1>
+  <section class="section">
+    <header class="container has-text-centered">
+      <h1 class="title is-2 part has-text-primary">Gráficas detalladas</h1>
       <h2 class="subtitle is-4">Pruebas de gráficas con fechas</h2>
-    </div>
+    </header>
 
-    <article class="section" v-if="!isLoading">
+    <article class="section">
       <div class="container">
-        <ChartComponent :config="getDataForMyExperimentalChart" />
+        <div class="columns">
+          <div class="column is-12-mobile is-5-tablet is-offset-1-tablet">
+            <b-skeleton
+              animated
+              height="350px"
+              :active="isLoading"
+            ></b-skeleton>
+
+            <ChartComponent
+              v-if="!isLoading"
+              :config="getDataForMyExperimentalChartLine"
+            />
+          </div>
+
+          <div class="column is-12-mobile is-5-tablet">
+            <b-skeleton
+              animated
+              height="350px"
+              :active="isLoading"
+            ></b-skeleton>
+
+            <ChartComponent
+              v-if="!isLoading"
+              :config="getDataForMyExperimentalChartBar"
+            />
+          </div>
+        </div>
       </div>
     </article>
   </section>
@@ -29,7 +53,11 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("data", ["getDataForMyExperimentalChart", "isDataReady"]),
+    ...mapGetters("data", [
+      "getDataForMyExperimentalChartLine",
+      "getDataForMyExperimentalChartBar",
+      "isDataReady",
+    ]),
     showData() {
       return this.$store.state.data;
     },
@@ -38,6 +66,7 @@ export default {
     ...mapActions("data", ["fetchData"]),
   },
   async created() {
+    console.log(this.isDataReady);
     if (!this.isDataReady) {
       try {
         this.isLoading = true;
@@ -57,7 +86,9 @@ export default {
         this.$store.dispatch("users/doLogout");
         this.$router.push({ name: "login" });
       } finally {
-        this.isLoading = false;
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 2500);
       }
     }
   },

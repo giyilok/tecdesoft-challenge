@@ -21,7 +21,7 @@ export default {
 .chart-wrapper {
   position: relative;
   margin: auto;
-  min-height: 500px;
+  min-height: 350px;
   width: 100%;
 }
 </style>

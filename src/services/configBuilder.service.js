@@ -1,4 +1,4 @@
-//import { format } from "date-fns";
+import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
 const colors = [
@@ -17,7 +17,6 @@ const configBuilderService = {
   // Obtener datos
   getDataForMyExperimentalChart(dataFromStore, type = "line") {
     const dataChart = JSON.parse(JSON.stringify(dataFromStore));
-    console.log("DataChart ", dataChart);
 
     // Setup
     // Datasets
@@ -36,15 +35,20 @@ const configBuilderService = {
       const obj = {
         label: prop,
         data: mappedPropArray,
-        borderColor: [`${colors[datasets.length]}`],
-        backgroundColor: [`${lightColors[datasets.length]}`],
+        borderColor:
+          type === "bar"
+            ? [`${lightColors[datasets.length]}`]
+            : [`${colors[datasets.length]}`],
+        backgroundColor:
+          type === "bar"
+            ? [`${colors[datasets.length]}`]
+            : [`${lightColors[datasets.length]}`],
       };
 
       datasets.push(obj);
     }
 
     const data = { datasets };
-    console.log("data ", data);
 
     // Config
     const config = {
@@ -82,7 +86,7 @@ const configBuilderService = {
           y: {
             title: {
               text: "Valores",
-              display: true,
+              display: false,
             },
             min: 30,
             max: 65,
@@ -174,7 +178,10 @@ const configBuilderService = {
     for (let prop in dataTable) {
       dataTable[prop]
         .map((item) => {
-          return { Fecha: item.Date, [prop]: item.Value };
+          return {
+            Fecha: format(new Date(item.Date), "dd/MM/yyyy", { locale: es }),
+            [prop]: item.Value,
+          };
         })
         .reduce((acc, item, index) => {
           let obj = {};
@@ -196,7 +203,10 @@ const configBuilderService = {
     for (let prop in dataTable) {
       const obj = dataTable[prop]
         .map((item) => {
-          return { [item.Date]: item.Value };
+          return {
+            [format(new Date(item.Date), "dd/MM/yy", { locale: es })]:
+              item.Value,
+          };
         })
         .reduce((acc, item) => {
           acc = Object.assign(acc, item);

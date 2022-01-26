@@ -47,7 +47,6 @@ const getters = {
     const mappedDataTable = configBuilderService.configBuilderForTableSensor(
       state.data
     );
-    console.log("data.store Sensors ", mappedDataTable);
     return JSON.parse(JSON.stringify(mappedDataTable));
   },
 
@@ -55,7 +54,6 @@ const getters = {
     const mappedDataTable = configBuilderService.configBuilderForTableDates(
       state.data
     );
-    console.log("data.store  Dates ", mappedDataTable);
     return JSON.parse(JSON.stringify(mappedDataTable));
   },
 

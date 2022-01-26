@@ -29,9 +29,11 @@
               ]"
             >
               <div class="level field">
-                <h3 class="is-size-5">Tabla customizada de Buefy</h3>
+                <h3 class="is-size-5 tag is-success">
+                  Tabla customizada de Buefy
+                </h3>
                 <div class="control has-text-right">
-                  <b-switch level v-model="toggleColumns"
+                  <b-switch level v-model="toggleColumns" type="is-success"
                     >Invertir columnas</b-switch
                   >
                 </div>
@@ -44,24 +46,89 @@
                 :loading="isLoading"
                 focusable
                 striped
+                @cellclick="openModal"
               ></b-table>
             </div>
           </div>
         </div>
       </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="columns">
+            <div
+              class="column box box-bordered"
+              :class="[
+                {
+                  'is-10': toggleColumnsGrid,
+                  'is-offset-1': toggleColumnsGrid,
+                  'is-8': !toggleColumnsGrid,
+                  'is-offset-2': !toggleColumnsGrid,
+                },
+              ]"
+            >
+              <div class="level field">
+                <h3 class="is-size-5 tag is-success">Tabla Ag-grid</h3>
+                <div class="control has-text-right">
+                  <b-switch level v-model="toggleColumnsGrid" type="is-success"
+                    >Invertir columnas</b-switch
+                  >
+                </div>
+              </div>
+
+              <ag-grid-vue
+                domLayout="autoHeight"
+                class="ag-theme-alpine ag-grid"
+                :class="[
+                  {
+                    'is-10': toggleColumnsGrid,
+                    'is-offset-1': toggleColumnsGrid,
+                    'is-8': !toggleColumnsGrid,
+                    'is-offset-2': !toggleColumnsGrid,
+                  },
+                ]"
+                :columnDefs="toggleColumnsGrid ? columnDefs2 : columnDefs1"
+                :rowData="
+                  toggleColumnsGrid ? getDataForTableDates : getDataForTable
+                "
+                @cell-double-clicked="openModalGrid"
+              >
+              </ag-grid-vue>
+            </div>
+          </div>
+        </div>
+      </section>
     </article>
+
+    <!-- Modal component -->
+    <b-modal
+      :active.sync="showModal"
+      has-modal-card
+      :destroy-on-hide="true"
+      trap-focus
+    >
+      <modal-card-component :results="modalData"></modal-card-component>
+    </b-modal>
+    <!-- End of Modal component -->
   </section>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import utils from "@/utils/utils.js";
+import ModalCardComponent from "@/components/ModalCardComponent.vue";
+import { AgGridVue } from "ag-grid-vue";
 
 export default {
   name: "tables",
+  components: { ModalCardComponent, AgGridVue },
   data() {
     return {
       isLoading: false,
       toggleColumns: false,
+      toggleColumnsGrid: false,
+      showModal: false,
+      modalData: {},
       selected: {},
       columns1: [
         {
@@ -148,6 +215,103 @@ export default {
           centered: true,
         },
       ],
+      columnDefs1: [
+        {
+          field: "Fecha",
+          sortable: true,
+          filter: true,
+        },
+        {
+          field: "HG",
+          sortable: true,
+          filter: true,
+          type: "numericColumn",
+        },
+        {
+          field: "HM",
+          sortable: true,
+          filter: true,
+          type: "numericColumn",
+        },
+        {
+          field: "HR",
+          sortable: true,
+          filter: true,
+          type: "numericColumn",
+        },
+      ],
+      columnDefs2: [
+        {
+          field: "sensor",
+          sortable: true,
+          filter: true,
+        },
+        {
+          field: "01/01/21",
+          sortable: true,
+          filter: true,
+          type: "numericColumn",
+        },
+        {
+          field: "02/01/21",
+          sortable: true,
+          filter: true,
+          type: "numericColumn",
+        },
+        {
+          field: "03/01/21",
+          sortable: true,
+          filter: true,
+          type: "numericColumn",
+        },
+        {
+          field: "04/01/21",
+          sortable: true,
+          filter: true,
+          type: "numericColumn",
+        },
+        {
+          field: "05/01/21",
+          sortable: true,
+          filter: true,
+          type: "numericColumn",
+        },
+        {
+          field: "06/01/21",
+          sortable: true,
+          filter: true,
+          type: "numericColumn",
+        },
+        {
+          field: "07/01/21",
+          sortable: true,
+          filter: true,
+          type: "numericColumn",
+        },
+        {
+          field: "08/01/21",
+          sortable: true,
+          filter: true,
+        },
+        {
+          field: "09/01/21",
+          sortable: true,
+          filter: true,
+          type: "numericColumn",
+        },
+        {
+          field: "10/01/21",
+          sortable: true,
+          filter: true,
+          type: "numericColumn",
+        },
+        {
+          field: "11/01/21",
+          sortable: true,
+          filter: true,
+          type: "numericColumn",
+        },
+      ],
     };
   },
   computed: {
@@ -159,11 +323,20 @@ export default {
   },
   methods: {
     ...mapActions("data", ["fetchData"]),
+    openModal(row) {
+      const results = utils.calculate(row);
+
+      this.modalData = results;
+      this.showModal = true;
+    },
+    openModalGrid(event) {
+      const results = utils.calculate(event.data);
+
+      this.modalData = results;
+      this.showModal = true;
+    },
   },
   async created() {
-    console.log("Data fpt table in view", this.getDataForTable);
-    console.log("Data dates table in view", this.getDataForTableDates);
-
     if (!this.isDataReady) {
       try {
         this.isLoading = true;
@@ -193,6 +366,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~ag-grid-community/dist/styles/ag-grid.css";
+@import "~ag-grid-community/dist/styles/ag-theme-alpine.css";
+
 .box-bordered {
   border: 3px solid $warning;
 }

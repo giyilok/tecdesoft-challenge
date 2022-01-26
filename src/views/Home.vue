@@ -75,7 +75,7 @@
             >
               <figure class="image is-square">
                 <img
-                  src="@/assets/images/banner-img.png"
+                  src="@/assets/images/charts.svg"
                   alt="Imagen de gráficos"
                 />
               </figure>

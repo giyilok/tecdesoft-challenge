@@ -1,8 +1,7 @@
 import axios from "axios";
 import User from "@/models/user.model.js";
 
-const AUTH_URL =
-  "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBr1ehjxkXlICK-Zu0Wu_zUg8H68aQAp5k";
+const AUTH_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.VUE_APP_APIKEY}`;
 
 const authService = {
   async login({ email, password }) {

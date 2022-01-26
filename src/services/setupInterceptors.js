@@ -26,7 +26,7 @@ const setup = (store) => {
 
       if (
         originalConfig.url !==
-          "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBr1ehjxkXlICK-Zu0Wu_zUg8H68aQAp5k" &&
+          `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.VUE_APP_APIKEY}` &&
         error.response
       ) {
         if (error.response.status === 401 && !originalConfig._retry) {
@@ -38,7 +38,7 @@ const setup = (store) => {
 
           try {
             const result = await axiosInstance.post(
-              "https://securetoken.googleapis.com/v1/token?key=AIzaSyBr1ehjxkXlICK-Zu0Wu_zUg8H68aQAp5k",
+              `https://securetoken.googleapis.com/v1/token?key=${process.env.VUE_APP_APIKEY}`,
               params,
               {
                 headers: {

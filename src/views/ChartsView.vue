@@ -66,7 +66,6 @@ export default {
     ...mapActions("data", ["fetchData"]),
   },
   async created() {
-    console.log(this.isDataReady);
     if (!this.isDataReady) {
       try {
         this.isLoading = true;

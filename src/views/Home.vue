@@ -75,7 +75,7 @@
             >
               <figure class="image is-square">
                 <img
-                  src="@/assets/images/charts.svg"
+                  src="https://res.cloudinary.com/deetmks7m/image/upload/v1643201058/charts_x5vu2q.svg"
                   alt="Imagen de gráficos"
                 />
               </figure>

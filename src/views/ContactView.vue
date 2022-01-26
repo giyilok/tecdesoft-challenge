@@ -39,7 +39,7 @@
             <p class="image">
               <img
                 class="is-1by1"
-                src="@/assets/images/me_rounded1.jpg"
+                src="https://res.cloudinary.com/deetmks7m/image/upload/v1643201058/me_rounded1_tit2rn.jpg"
                 alt="Mi foto en la selva"
               />
             </p>

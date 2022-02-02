@@ -2,7 +2,7 @@
   <b-navbar wrapper-class="container" shadow centered spaced>
     <template #brand>
       <b-navbar-item tag="router-link" :to="{ path: '/Home' }">
-        <p class="title is-4 has-text-primary">Tecdesoft Challenge</p>
+        <p class="title is-4 has-text-primary">Tech Challenge</p>
       </b-navbar-item>
     </template>
 
